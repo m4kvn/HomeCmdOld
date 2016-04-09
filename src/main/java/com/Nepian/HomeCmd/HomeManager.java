@@ -49,4 +49,8 @@ public class HomeManager {
 	public static Location getHome(UUID uuid) {
 		return homeDatas.get(uuid);
 	}
+	
+	public static boolean hasHome(UUID uuid) {
+		return homeDatas.containsKey(uuid);
+	}
 }
