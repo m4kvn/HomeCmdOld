@@ -1,20 +1,16 @@
 package com.Nepian.HomeCmd;
 
-import java.io.File;
+import static com.Nepian.HomeCmd.FileLoader.FileType.*;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import java.io.File;
 
 import com.Nepian.HomeCmd.FileLoader.FileType;
 
 public class FileManager {
-	public File FOLDER_MAIN;
-	public File FILE_HOME_DATA;
+	public static final File FOLDER_MAIN = Main.plugin.getDataFolder();
+	public static final File FILE_HOME_DATA = load("home_data.yml", FILE);
 	
-	public FileManager(JavaPlugin plugin) {
-	}
-
-	public void load(File dataFolder) {
-		FOLDER_MAIN = dataFolder;
-		FILE_HOME_DATA = FileLoader.load(FOLDER_MAIN, "home_data.yml", FileType.FILE);
+	private static File load(String fileName, FileType type) {
+		return FileLoader.load(FOLDER_MAIN, fileName, type);
 	}
 }
