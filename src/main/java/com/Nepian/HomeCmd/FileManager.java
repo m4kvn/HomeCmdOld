@@ -15,6 +15,6 @@ public class FileManager {
 
 	public void load(File dataFolder) {
 		FOLDER_MAIN = dataFolder;
-		FILE_HOME_DATA = FileLoader.load(FOLDER_MAIN, "home_data", FileType.FILE);
+		FILE_HOME_DATA = FileLoader.load(FOLDER_MAIN, "home_data.yml", FileType.FILE);
 	}
 }
