@@ -5,7 +5,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SetHomeCommand implements CommandExecutor {
+import com.Nepian.HomeCmd.HomeManager;
+
+public class SethomeCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -14,8 +16,9 @@ public class SetHomeCommand implements CommandExecutor {
 			return true;
 		}
 
-//		Player player = (Player) sender;
-//		String uuidStr = player.getUniqueId().toString();
+		Player player = (Player) sender;
+		
+		HomeManager.putHome(player.getUniqueId(), player.getLocation());
 		
 		return true;
 	}
