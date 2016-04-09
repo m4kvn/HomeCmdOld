@@ -1,14 +1,19 @@
 package com.Nepian.HomeCmd;
 
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommandManager {
-	private static Main plugin = Main.getPlugin();
+	private JavaPlugin plugin;
 
-	public static void load() {
+	public CommandManager(JavaPlugin plugin) {
+		this.plugin = plugin;
+	}
+	
+	public void load() {
 	}
 
-	public static void registerCommand(String name, CommandExecutor command) {
+	public void registerCommand(String name, CommandExecutor command) {
 		plugin.getCommand(name).setExecutor(command);
 	}
 }

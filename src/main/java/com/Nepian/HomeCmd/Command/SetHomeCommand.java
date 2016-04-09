@@ -1,6 +1,5 @@
 package com.Nepian.HomeCmd.Command;
 
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,10 +14,9 @@ public class SetHomeCommand implements CommandExecutor {
 			return true;
 		}
 
-		Player player = (Player) sender;
-		String name = player.getDisplayName();
-		Location location = player.getLocation();
-
+//		Player player = (Player) sender;
+//		String uuidStr = player.getUniqueId().toString();
+		
 		return true;
 	}
 
