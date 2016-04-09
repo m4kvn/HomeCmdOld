@@ -23,7 +23,7 @@ public class HomeCommand implements CommandExecutor {
 		UUID uuid = player.getUniqueId();
 		
 		if (!HomeManager.hasHome(uuid)) {
-			player.sendMessage("HOMEが設定されていません");
+			player.sendMessage("ホームが設定されていません");
 			return true;
 		}
 		

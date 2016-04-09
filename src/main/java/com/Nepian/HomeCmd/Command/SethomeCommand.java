@@ -20,6 +20,8 @@ public class SethomeCommand implements CommandExecutor {
 		
 		HomeManager.putHome(player.getUniqueId(), player.getLocation());
 		
+		player.sendMessage("ホームを設定しました");
+		
 		return true;
 	}
 
