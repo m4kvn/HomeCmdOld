@@ -50,7 +50,11 @@ public class PlayerdataManager {
 	}
 
 	public static Playerdata getPlayerdata(UUID uuid) {
-		return playerdatas.get(uuid);
+		if (playerdatas.containsKey(uuid)) {
+			return playerdatas.get(uuid);
+		} else {
+			return new Playerdata(uuid);
+		}
 	}
 
 	public static boolean hasPlayerdata(UUID uuid) {

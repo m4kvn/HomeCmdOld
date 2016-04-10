@@ -8,7 +8,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		plugin = this;
-		ConfigurationSerializationClassRegister.load();
+		SerializationClassRegister.load();
 		CommandManager.load(plugin);
 		PlayerdataManager.load(FileManager.FOLDER_USERS);
 	}

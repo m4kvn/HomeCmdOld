@@ -15,7 +15,7 @@ import com.Nepian.HomeCmd.Data.Playerdata;
 public class SetCommand extends SubCommand {
 
 	public SetCommand() {
-		super("set");
+		super("set", "s");
 		setPermission("homecmd.set");
 	}
 
@@ -29,15 +29,30 @@ public class SetCommand extends SubCommand {
 		Player player = (Player) sender;
 		UUID uuid = player.getUniqueId();
 		Location location = player.getLocation();
-		Playerdata playerdata = new Playerdata(uuid, location);
+		Playerdata playerdata = PlayerdataManager.getPlayerdata(uuid);
+
+		if (args.length == 0) {
+			playerdata.setDefaultHome(location);
+			player.sendMessage("デフォルトのホームを設定しました");
+
+		} else if (args.length == 1) {
+			String homename = args[0];
+
+			if (homename.contains("-")) {
+				player.sendMessage("ホーム名に\"-\"は使用できません");
+				return;
+			}
+
+			playerdata.getNamedHomes().putNamedHome(homename, location);
+			player.sendMessage("ホーム<" + homename + ">を設定しました");
+		}
 
 		PlayerdataManager.putPlayerdata(uuid, playerdata);
-		player.sendMessage("ホームを設定しました");
 	}
 
 	@Override
 	public String getPossibleArguments() {
-		return null;
+		return "<ホームの名前>";
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Nepian.HomeCmd.Command.CommandHandler;
 import com.Nepian.HomeCmd.Command.Sub.HomeCommand;
+import com.Nepian.HomeCmd.Command.Sub.ListCommand;
 import com.Nepian.HomeCmd.Command.Sub.SetCommand;
 import com.Nepian.HomeCmd.Util.Utility;
 
@@ -14,6 +15,7 @@ public class CommandManager {
 		command = new CommandHandler();
 		command.registerMainCommand(new HomeCommand());
 		command.registerSubCommand(new SetCommand());
+		command.registerSubCommand(new ListCommand());
 
 		Utility.registerCommand(plugin, "home", command);
 	}

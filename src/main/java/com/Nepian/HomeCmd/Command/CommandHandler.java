@@ -22,24 +22,12 @@ public class CommandHandler implements CommandExecutor {
 	public boolean onCommand(CommandSender sender,
 			Command command, String label, String[] args) {
 
-		if (args.length == 0) {
-			if (mainCommand.isValidTrigger(label)) {
-				if (!mainCommand.hasPermission(sender)) {
-					sender.sendMessage("You don't have permission!");
-					return true;
+		if (args.length > 0 && args[0].startsWith("-")) {
+			for (SubCommand subCommand : subCommands) {
+				if (!subCommand.isValidTrigger(args[0].replace("-", ""))) {
+					continue;
 				}
 
-				try {
-					mainCommand.execute(sender, label, args);
-				} catch (CommandException e) {
-					sender.sendMessage(e.getMessage());
-				}
-			}
-			return true;
-		}
-
-		for (SubCommand subCommand : subCommands) {
-			if (subCommand.isValidTrigger(args[0])) {
 				if (!subCommand.hasPermission(sender)) {
 					sender.sendMessage("You don't have permission!");
 					return true;
@@ -60,6 +48,20 @@ public class CommandHandler implements CommandExecutor {
 				}
 				return true;
 			}
+		}
+
+		if (mainCommand.isValidTrigger(label)) {
+			if (!mainCommand.hasPermission(sender)) {
+				sender.sendMessage("You don't have permission!");
+				return true;
+			}
+
+			try {
+				mainCommand.execute(sender, label, args);
+			} catch (CommandException e) {
+				sender.sendMessage(e.getMessage());
+			}
+			return true;
 		}
 
 		sender.sendMessage("Unknown sub-command. Type \"/" + label + " help\" for a list of commands.");

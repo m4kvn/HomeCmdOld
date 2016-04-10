@@ -1,9 +1,8 @@
 package com.Nepian.HomeCmd.Command.Sub;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Set;
 
-import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,11 +11,10 @@ import com.Nepian.HomeCmd.PlayerdataManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
 import com.Nepian.HomeCmd.Data.Playerdata;
 
-public class HomeCommand extends SubCommand {
+public class ListCommand extends SubCommand {
 
-	public HomeCommand() {
-		super("home");
-		setPermission("homecmd.home");
+	public ListCommand() {
+		super("list", "l");
 	}
 
 	@Override
@@ -27,29 +25,10 @@ public class HomeCommand extends SubCommand {
 		}
 
 		Player player = (Player) sender;
-		UUID uuid = player.getUniqueId();
-		Playerdata playerdata = PlayerdataManager.getPlayerdata(uuid);
-		Location location = null;
+		Playerdata playerdata = PlayerdataManager.getPlayerdata(player.getUniqueId());
+		Set<String> homes = playerdata.getNamedHomes().getNamedHomeLocations().keySet();
 
-		if (args.length == 0) {
-			if (!playerdata.hasDefaultHome()) {
-				player.sendMessage("デフォルトのホームが設定されていません");
-				return;
-			}
-			location = playerdata.getDefaultHome();
-
-		} else if (args.length == 1) {
-			String homename = args[0];
-
-			location = playerdata.getNamedHomeLocation(homename);
-
-			if (location == null) {
-				player.sendMessage("ホーム<" + homename + ">は設定されていません");
-				return;
-			}
-		}
-
-		player.teleport(location);
+		player.sendMessage("NamedHomes: " + homes.toString());
 	}
 
 	@Override
