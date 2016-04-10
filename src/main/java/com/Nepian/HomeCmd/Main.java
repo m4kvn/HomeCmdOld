@@ -8,12 +8,13 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		plugin = this;
+		ConfigurationSerializationClassRegister.load();
 		CommandManager.load(plugin);
-		HomeManager.load(plugin, FileManager.FILE_HOME_DATA);
+		PlayerdataManager.load(FileManager.FOLDER_USERS);
 	}
 
 	@Override
 	public void onDisable() {
-		HomeManager.save(FileManager.FILE_HOME_DATA);
+		PlayerdataManager.save(FileManager.FOLDER_USERS);
 	}
 }
