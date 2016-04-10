@@ -1,6 +1,6 @@
 name: HomeCmd
 main: com.Nepian.HomeCmd.Main
-version: 0.0.2
+version: 0.3.3
 author: Nepian
 load: POSTWORLD
 softdepend: [ Multiverse-Core ]
