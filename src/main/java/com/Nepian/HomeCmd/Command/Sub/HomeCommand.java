@@ -8,8 +8,9 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.Nepian.HomeCmd.HomeManager;
+import com.Nepian.HomeCmd.PlayerdataManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
+import com.Nepian.HomeCmd.Data.Playerdata;
 
 public class HomeCommand extends SubCommand {
 
@@ -20,6 +21,7 @@ public class HomeCommand extends SubCommand {
 
 	@Override
 	public void execute(CommandSender sender, String label, String[] args) throws CommandException {
+
 		if (!(sender instanceof Player)) {
 			return;
 		}
@@ -27,12 +29,13 @@ public class HomeCommand extends SubCommand {
 		Player player = (Player) sender;
 		UUID uuid = player.getUniqueId();
 
-		if (!HomeManager.hasHome(uuid)) {
+		if (!PlayerdataManager.hasPlayerdata(uuid)) {
 			player.sendMessage("ホームが設定されていません");
 			return;
 		}
 
-		Location location = HomeManager.getHome(uuid);
+		Playerdata playerdata = PlayerdataManager.getPlayerdata(uuid);
+		Location location = playerdata.getDefaultHome();
 
 		player.teleport(location);
 	}

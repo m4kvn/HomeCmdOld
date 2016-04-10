@@ -1,13 +1,16 @@
 package com.Nepian.HomeCmd.Command.Sub;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.Nepian.HomeCmd.HomeManager;
+import com.Nepian.HomeCmd.PlayerdataManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
+import com.Nepian.HomeCmd.Data.Playerdata;
 
 public class SetCommand extends SubCommand {
 
@@ -24,9 +27,11 @@ public class SetCommand extends SubCommand {
 		}
 
 		Player player = (Player) sender;
+		UUID uuid = player.getUniqueId();
+		Location location = player.getLocation();
+		Playerdata playerdata = new Playerdata(uuid, location);
 
-		HomeManager.putHome(player.getUniqueId(), player.getLocation());
-
+		PlayerdataManager.putPlayerdata(uuid, playerdata);
 		player.sendMessage("ホームを設定しました");
 	}
 
