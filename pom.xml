@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.Nepian.HomeCmd</groupId>
   <artifactId>HomeCmd</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2</version>
 
   <properties>
     <github.global.server>github</github.global.server>
@@ -33,6 +33,7 @@
   </dependencies>
 
   <build>
+    <finalName>${artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
