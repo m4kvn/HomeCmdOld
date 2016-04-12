@@ -11,6 +11,7 @@ public class Main extends JavaPlugin {
 		SerializationClassRegister.load();
 		CommandManager.load(plugin);
 		PlayerdataManager.load(FileManager.FOLDER_USERS);
+		ListenerManager.load(plugin);
 	}
 
 	@Override
