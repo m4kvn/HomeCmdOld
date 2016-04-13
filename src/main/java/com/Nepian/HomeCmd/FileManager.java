@@ -8,4 +8,5 @@ import java.io.File;
 public class FileManager extends FileLoader {
 	public static final File FOLDER_MAIN = Main.plugin.getDataFolder();
 	public static final File FOLDER_USERS = load(FOLDER_MAIN, USER_DATA_FOLDER_NAME, FOLDER);
+	public static final File FILE_SQLITE = load(FOLDER_MAIN, SQLITE_FILE_NAME, FILE);
 }
