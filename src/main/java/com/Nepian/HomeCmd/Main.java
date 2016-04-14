@@ -2,6 +2,8 @@ package com.Nepian.HomeCmd;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.Nepian.HomeCmd.Configuration.SerializationClassRegister;
+
 public class Main extends JavaPlugin {
 	public static JavaPlugin plugin;
 

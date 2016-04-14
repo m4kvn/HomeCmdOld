@@ -32,7 +32,7 @@ public class AddCommand extends SubCommand {
 		UUID uuid = player.getUniqueId();
 		Playerdata playerdata = PlayerdataManager.getPlayerdata(uuid);
 		
-		MySQLite.insert(name, uuid, playerdata.getDefaultHome());
+		MySQLite.insert(player, playerdata.getDefaultHome(), "-default");
 	}
 
 	@Override
