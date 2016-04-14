@@ -9,6 +9,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 
+		Logger.load(plugin);
 		MySQLite.load(FileManager.FILE_SQLITE);
 		SerializationClassRegister.load();
 		CommandManager.load(plugin);
