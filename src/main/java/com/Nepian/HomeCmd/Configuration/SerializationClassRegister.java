@@ -1,4 +1,4 @@
-package com.Nepian.HomeCmd;
+package com.Nepian.HomeCmd.Configuration;
 
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
