@@ -7,6 +7,7 @@ import com.Nepian.HomeCmd.Command.Sub.AddCommand;
 import com.Nepian.HomeCmd.Command.Sub.HomeCommand;
 import com.Nepian.HomeCmd.Command.Sub.ListCommand;
 import com.Nepian.HomeCmd.Command.Sub.SetCommand;
+import com.Nepian.HomeCmd.Command.Sub.ShowCommand;
 import com.Nepian.HomeCmd.Util.Utility;
 
 public class CommandManager {
@@ -18,6 +19,7 @@ public class CommandManager {
 		command.registerSubCommand(new SetCommand());
 		command.registerSubCommand(new ListCommand());
 		command.registerSubCommand(new AddCommand());
+		command.registerSubCommand(new ShowCommand());
 
 		Utility.registerCommand(plugin, "home", command);
 	}
