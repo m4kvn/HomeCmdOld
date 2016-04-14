@@ -31,6 +31,8 @@ public class MySQLite {
 		if (statement == null) {
 			return;
 		}
+		
+		createTable();
 	}
 	
 	public static void close() {
@@ -99,6 +101,14 @@ public class MySQLite {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private static void createTable() {
+		try {
+			statement.executeUpdate("create table if not exists users (name, uuid, home)");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }
