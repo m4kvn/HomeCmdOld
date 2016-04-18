@@ -14,7 +14,7 @@ public class SQLiteManager {
 	}
 	
 	private static void createTable() {
-		String token = "create table " + tableName + " ("
+		String token = "create table if not exists " + tableName + " ("
 				+ "player_uuid, player_name, home_name, world_uuid, x, y, z, yaw, pitch)";
 		if (!data.executeUpdate(token)) {
 			Logger.failed("Could not create a table (&6" + tableName + "&r)");
