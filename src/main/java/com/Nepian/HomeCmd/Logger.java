@@ -13,12 +13,20 @@ public class Logger {
 	
 	public static void log(String str) {
 		String msg = ChatColor.translateAlternateColorCodes(
-				'&', "&3[&d" + plugin.getName() + "&3]&r " + str);
+				'&', "&d" + plugin.getName() + ":&r " + str);
 		
 		Bukkit.getServer().getConsoleSender().sendMessage(msg);
 	}
 	
 	public static void debug(String str) {
-		Logger.log("&7[&eDEBUG&7]&r " + str);
+		Logger.log("&eDEBUG:&r " + str);
+	}
+	
+	public static void success(String str) {
+		debug("&9SUCCESS:&r " + str);
+	}
+	
+	public static void failed(String str) {
+		debug("&4FAILED:&r " + str);
 	}
 }
