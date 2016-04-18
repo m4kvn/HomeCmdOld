@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.Nepian.HomeCmd.Logger;
-
 public class SQLite {
 	private static String[] updateCmd = { "create", "insert", "update", "delete" };
 	private static String[] queryCmd = { "select" };
@@ -51,8 +49,7 @@ public class SQLite {
 		}
 		
 		try {
-			Integer res = statement.executeUpdate(token);
-			Logger.debug(res.toString());
+			statement.executeUpdate(token);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
