@@ -39,14 +39,14 @@ public class SQLiteManager {
 				+ "pitch not null"
 				+ ")";
 		if (!data.executeUpdate(token)) {
-			Logger.failed("Could not create a table (&6" + tableName + "&r)");
+			Messenger.failed("Could not create a table (&6" + tableName + "&r)");
 		}
-		Logger.success("Created a table (&6" + tableName + "&r)");
+		Messenger.success("Created a table (&6" + tableName + "&r)");
 	}
 	
 	public static void insert(OfflinePlayer offlinePlayer, String homeName, Location home) {
 		if (has(offlinePlayer, homeName)) {
-			Logger.debug("Already Exists");
+			Messenger.debug("Already Exists");
 			update(offlinePlayer, homeName, home);
 			return;
 		}
@@ -75,18 +75,18 @@ public class SQLiteManager {
 		token.append(")");
 		
 		if (!data.executeUpdate(token.toString())) {
-			Logger.failed("Could not insert the data.");
+			Messenger.failed("Could not insert the data.");
 			return;
 		}
 		
-		Logger.success("Inserted the data.");
+		Messenger.success("Inserted the data.");
 	}
 	
 	public static void close() {
 		if (!data.close()) {
-			Logger.failed("Could not close a SQLite file (&6" + data.getFile().getName() + "&r)");
+			Messenger.failed("Could not close a SQLite file (&6" + data.getFile().getName() + "&r)");
 		}
-		Logger.success("Closed a SQLite file (&6" + data.getFile().getName() + "&r)");
+		Messenger.success("Closed a SQLite file (&6" + data.getFile().getName() + "&r)");
 	}
 	
 	public static boolean has(OfflinePlayer offlinePlayer, String homeName) {
@@ -136,11 +136,11 @@ public class SQLiteManager {
 		token.append("home_name = ").append("'" + homeName + "'");
 		
 		if (!data.executeUpdate(token.toString())) {
-			Logger.failed("Could not update the data.");
+			Messenger.failed("Could not update the data.");
 			return;
 		}
 		
-		Logger.success("Updated the data.");
+		Messenger.success("Updated the data.");
 	}
 	
 	public static Location getHome(OfflinePlayer player, String homeName) {
