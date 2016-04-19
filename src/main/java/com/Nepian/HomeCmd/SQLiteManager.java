@@ -44,7 +44,7 @@ public class SQLiteManager {
 	}
 	
 	public static void insert(OfflinePlayer offlinePlayer, String homeName, Location home) {
-		if (check(offlinePlayer, homeName)) {
+		if (has(offlinePlayer, homeName)) {
 			Logger.debug("Already Exists");
 			update(offlinePlayer, homeName, home);
 			return;
@@ -88,7 +88,7 @@ public class SQLiteManager {
 		Logger.success("Closed a SQLite file (&6" + data.getFile().getName() + "&r)");
 	}
 	
-	public static boolean check(OfflinePlayer offlinePlayer, String homeName) {
+	public static boolean has(OfflinePlayer offlinePlayer, String homeName) {
 		String playerUidStr = offlinePlayer.getUniqueId().toString();
 		StringBuilder token = new StringBuilder("");
 		
