@@ -1,25 +1,23 @@
 package com.Nepian.HomeCmd;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Logger {
-	private static JavaPlugin plugin;
+import com.Nepian.HomeCmd.Util.Sender;
+
+public class Messenger {
+	private static Sender sender;
 	
 	public static void load(JavaPlugin plugin) {
-		Logger.plugin = plugin;
+		sender = new Sender(plugin);
 	}
 	
 	public static void log(String str) {
-		String msg = ChatColor.translateAlternateColorCodes(
-				'&', "&d" + plugin.getName() + ":&r " + str);
-		
-		Bukkit.getServer().getConsoleSender().sendMessage(msg);
+		sender.log(str);
 	}
 	
 	public static void debug(Object obj) {
-		Logger.log("&eDEBUG:&r " + obj);
+		sender.log("&eDEBUG:&r " + obj);
 	}
 	
 	public static void success(Object obj) {
@@ -28,5 +26,9 @@ public class Logger {
 	
 	public static void failed(Object obj) {
 		debug("&4FAILED:&r " + obj);
+	}
+	
+	public static void send(CommandSender sender, Object obj) {
+		Messenger.sender.send(sender, obj);
 	}
 }

@@ -10,7 +10,7 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
-import com.Nepian.HomeCmd.Logger;
+import com.Nepian.HomeCmd.Messenger;
 import com.Nepian.HomeCmd.PlayerdataManager;
 import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
@@ -48,7 +48,7 @@ public class ConvertCommand extends SubCommand {
 			
 			if (overwrite || (!overwrite && !SQLiteManager.has(player, def))) {
 				SQLiteManager.insert(player, def, data.getDefaultHome());
-				Logger.log("Insert data: PlayerName: " + player.getName() + " HomeName: " + def);
+				Messenger.log("Insert data: PlayerName: " + player.getName() + " HomeName: " + def);
 			}
 			
 			NamedHomes namedHomes = data.getNamedHomes();
@@ -57,9 +57,9 @@ public class ConvertCommand extends SubCommand {
 			for (String name : homes.keySet()) {
 				Location home = homes.get(name);
 				
-				if (overwrite || (!overwrite && !SQLiteManager.has(player, def))) {
+				if (overwrite || (!overwrite && !SQLiteManager.has(player, name))) {
 					SQLiteManager.insert(player, name, home);
-					Logger.log("Insert data: PlayerName: " + player.getName() + " HomeName: " + name);
+					Messenger.log("Insert data: PlayerName: " + player.getName() + " HomeName: " + name);
 				}
 			}
 		}

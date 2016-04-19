@@ -11,7 +11,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 
-		Logger.load(plugin);
+		Messenger.load(plugin);
 		SQLiteManager.load(FileManager.FILE_SQLITE);
 		SerializationClassRegister.load();
 		CommandManager.load(plugin);
