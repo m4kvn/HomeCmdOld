@@ -18,15 +18,15 @@ public class Logger {
 		Bukkit.getServer().getConsoleSender().sendMessage(msg);
 	}
 	
-	public static void debug(String str) {
-		Logger.log("&eDEBUG:&r " + str);
+	public static void debug(Object obj) {
+		Logger.log("&eDEBUG:&r " + obj);
 	}
 	
-	public static void success(String str) {
-		debug("&9SUCCESS:&r " + str);
+	public static void success(Object obj) {
+		debug("&9SUCCESS:&r " + obj);
 	}
 	
-	public static void failed(String str) {
-		debug("&4FAILED:&r " + str);
+	public static void failed(Object obj) {
+		debug("&4FAILED:&r " + obj);
 	}
 }
