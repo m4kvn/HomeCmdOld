@@ -1,10 +1,10 @@
-package com.Nepian.HomeCmd;
+package com.Nepian.HomeCmd.Util;
 
 import java.io.File;
 
 public class FileLoader {
 
-	enum FileType { FILE, FOLDER }
+	public enum FileType { FILE, FOLDER }
 	
 	public static File load(File folder, String fileName, FileType type) {
 		File file = new File(folder, fileName);

@@ -1,9 +1,11 @@
 package com.Nepian.HomeCmd;
 
 import static com.Nepian.HomeCmd.Configuration.Propertie.*;
-import static com.Nepian.HomeCmd.FileLoader.FileType.*;
+import static com.Nepian.HomeCmd.Util.FileLoader.FileType.*;
 
 import java.io.File;
+
+import com.Nepian.HomeCmd.Util.FileLoader;
 
 public class FileManager extends FileLoader {
 	public static final File FOLDER_MAIN = Main.plugin.getDataFolder();
