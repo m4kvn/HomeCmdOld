@@ -1,18 +1,15 @@
 package com.Nepian.HomeCmd.Command.Sub;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
 import com.Nepian.HomeCmd.Logger;
-import com.Nepian.HomeCmd.MySQLite;
+import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
-import com.Nepian.HomeCmd.Util.PlayerUtil;
 
 public class ShowCommand extends SubCommand {
 	
@@ -28,25 +25,12 @@ public class ShowCommand extends SubCommand {
 			return;
 		}
 		
-		OfflinePlayer player = PlayerUtil.getOfflinePlayer(args[0]);
-		ResultSet rs = MySQLite.getResultSet(player);
-		
-		if (rs == null) {
-			Logger.log("Player not found");
-			return;
-		}
-		
+		Map<String, List<String>> datas = SQLiteManager.getDatas();
 		StringBuilder msg = new StringBuilder("Database Data\n");
 		
-		try {
-			while (rs.next()) {
-				msg.append("Player Name: ").append(rs.getString("player_name")).append("\n");
-				msg.append("Player UUID: ").append(rs.getString("player_uuid")).append("\n");
-				msg.append("Player Home: ").append(rs.getString("home_name")).append("\n");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return;
+		for (String name : datas.keySet()) {
+			List<String> list = datas.get(name);
+			msg.append(name).append(": ").append(list).append("\n");
 		}
 		
 		Logger.log(msg.toString());
@@ -54,12 +38,12 @@ public class ShowCommand extends SubCommand {
 
 	@Override
 	public String getPossibleArguments() {
-		return "<player_name>";
+		return null;
 	}
 
 	@Override
 	public int getMinimumArguments() {
-		return 1;
+		return 0;
 	}
 
 	@Override

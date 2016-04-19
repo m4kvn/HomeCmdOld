@@ -8,8 +8,8 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
-import com.Nepian.HomeCmd.MySQLite;
 import com.Nepian.HomeCmd.PlayerdataManager;
+import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
 import com.Nepian.HomeCmd.Data.Playerdata;
 import com.Nepian.HomeCmd.Util.PlayerUtil;
@@ -32,7 +32,8 @@ public class AddCommand extends SubCommand {
 		UUID uuid = player.getUniqueId();
 		Playerdata playerdata = PlayerdataManager.getPlayerdata(uuid);
 		
-		MySQLite.insert(player, playerdata.getDefaultHome(), "-default");
+		SQLiteManager.insert(player, "-default", playerdata.getDefaultHome());
+//		MySQLite.insert(player, playerdata.getDefaultHome(), "-default");
 	}
 
 	@Override

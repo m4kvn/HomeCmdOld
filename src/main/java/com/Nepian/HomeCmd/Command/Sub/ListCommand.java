@@ -1,15 +1,13 @@
 package com.Nepian.HomeCmd.Command.Sub;
 
 import java.util.List;
-import java.util.Set;
 
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.Nepian.HomeCmd.PlayerdataManager;
+import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
-import com.Nepian.HomeCmd.Data.Playerdata;
 
 public class ListCommand extends SubCommand {
 
@@ -25,10 +23,14 @@ public class ListCommand extends SubCommand {
 		}
 
 		Player player = (Player) sender;
-		Playerdata playerdata = PlayerdataManager.getPlayerdata(player.getUniqueId());
-		Set<String> homes = playerdata.getNamedHomes().getNamedHomeLocations().keySet();
-
-		player.sendMessage("NamedHomes: " + homes.toString());
+		List<String> list = SQLiteManager.getHomeList(player);
+		
+		if (list == null) {
+			player.sendMessage("ホームが設定されていません");
+			return;
+		}
+		
+		player.sendMessage("Homes: " + list.toString());
 	}
 
 	@Override

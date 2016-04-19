@@ -1,16 +1,14 @@
 package com.Nepian.HomeCmd.Command.Sub;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.Nepian.HomeCmd.PlayerdataManager;
+import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
-import com.Nepian.HomeCmd.Data.Playerdata;
 
 public class SetCommand extends SubCommand {
 
@@ -27,12 +25,10 @@ public class SetCommand extends SubCommand {
 		}
 
 		Player player = (Player) sender;
-		UUID uuid = player.getUniqueId();
 		Location location = player.getLocation();
-		Playerdata playerdata = PlayerdataManager.getPlayerdata(uuid);
 
 		if (args.length == 0) {
-			playerdata.setDefaultHome(location);
+			SQLiteManager.insert(player, "-default", location);
 			player.sendMessage("デフォルトのホームを設定しました");
 
 		} else if (args.length == 1) {
@@ -43,11 +39,9 @@ public class SetCommand extends SubCommand {
 				return;
 			}
 
-			playerdata.getNamedHomes().putNamedHome(homename, location);
+			SQLiteManager.insert(player, homename, location);
 			player.sendMessage("ホーム<" + homename + ">を設定しました");
 		}
-
-		PlayerdataManager.putPlayerdata(uuid, playerdata);
 	}
 
 	@Override
