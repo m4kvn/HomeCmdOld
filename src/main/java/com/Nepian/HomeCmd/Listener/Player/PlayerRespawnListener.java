@@ -6,21 +6,18 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import com.Nepian.HomeCmd.PlayerdataManager;
-import com.Nepian.HomeCmd.Data.Playerdata;
+import com.Nepian.HomeCmd.SQLiteManager;
 
 public class PlayerRespawnListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public static void onPlayerRespawn(PlayerRespawnEvent event) {
-
 		Player player = event.getPlayer();
-		Playerdata playerdata = PlayerdataManager.getPlayerdata(player.getUniqueId());
 
-		if (!playerdata.hasDefaultHome()) {
+		if (!SQLiteManager.has(player, "-default")) {
 			return;
 		}
 
-		event.setRespawnLocation(playerdata.getDefaultHome());
+		event.setRespawnLocation(SQLiteManager.getHome(player, "-default"));
 	}
 }
