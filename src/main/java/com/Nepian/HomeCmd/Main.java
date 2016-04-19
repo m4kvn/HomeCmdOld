@@ -12,7 +12,6 @@ public class Main extends JavaPlugin {
 		plugin = this;
 
 		Logger.load(plugin);
-//		MySQLite.load(FileManager.FILE_SQLITE);
 		SQLiteManager.load(FileManager.FILE_SQLITE);
 		SerializationClassRegister.load();
 		CommandManager.load(plugin);
@@ -23,7 +22,6 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		PlayerdataManager.save(FileManager.FOLDER_USERS);
-//		MySQLite.close();
 		SQLiteManager.close();
 	}
 }
