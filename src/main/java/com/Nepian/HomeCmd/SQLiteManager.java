@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -195,21 +196,23 @@ public class SQLiteManager {
 	}
 	
 	public static Map<String, List<String>> getDatas() {
-		String token = "select player_name, player_uuid from " + tableName;
+		String token = "select distinct player_name, player_uuid from " + tableName;
 		ResultSet rs = data.executeQuery(token);
 		Map<String, List<String>> map = New.newMap();
+		Set<String> names = New.newSet();
 		
 		try {
 			while (rs.next()) {
-				String name = rs.getString("player_name");
-				UUID uuid = UUID.fromString(rs.getString("player_uuid"));
-				OfflinePlayer player = PlayerUtil.getOfflinePlayer(uuid);
-				List<String> list = getHomeList(player);
-				
-				map.put(name, list);
+				names.add(rs.getString("player_name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		
+		for (String name : names) {
+			OfflinePlayer player = PlayerUtil.getOfflinePlayer(name);
+			List<String> list = getHomeList(player);
+			map.put(name, list);
 		}
 		
 		return map;

@@ -60,4 +60,8 @@ public class PlayerdataManager {
 	public static boolean hasPlayerdata(UUID uuid) {
 		return playerdatas.containsKey(uuid);
 	}
+	
+	public static Map<UUID, Playerdata> getPlayerdatas() {
+		return playerdatas;
+	}
 }
