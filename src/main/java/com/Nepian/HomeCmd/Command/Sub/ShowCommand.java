@@ -15,13 +15,14 @@ public class ShowCommand extends SubCommand {
 	
 	public ShowCommand() {
 		super("show");
+		setPermission("homecmd.show");
 	}
 
 	@Override
 	public void execute(CommandSender sender, String label, String[] args) throws CommandException {
 		
 		if (!(sender instanceof ConsoleCommandSender)) {
-			Messenger.log("This command is only ConsoleCommandSender");
+			Messenger.sendFailed(sender, "このコマンドはコンソールからのみ使用できます");
 			return;
 		}
 		

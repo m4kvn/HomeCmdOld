@@ -2,6 +2,7 @@ package com.Nepian.HomeCmd;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.Nepian.HomeCmd.Configuration.Config;
 import com.Nepian.HomeCmd.Configuration.SerializationClassRegister;
 
 public class Main extends JavaPlugin {
@@ -12,6 +13,7 @@ public class Main extends JavaPlugin {
 		plugin = this;
 
 		Messenger.load(plugin);
+		Config.load(FileManager.FILE_CONFIG);
 		SQLiteManager.load(FileManager.FILE_SQLITE);
 		SerializationClassRegister.load();
 		CommandManager.load(plugin);
@@ -23,5 +25,6 @@ public class Main extends JavaPlugin {
 	public void onDisable() {
 		PlayerdataManager.save(FileManager.FOLDER_USERS);
 		SQLiteManager.close();
+		Config.save();
 	}
 }

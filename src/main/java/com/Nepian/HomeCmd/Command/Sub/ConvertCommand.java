@@ -14,7 +14,7 @@ import com.Nepian.HomeCmd.Messenger;
 import com.Nepian.HomeCmd.PlayerdataManager;
 import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
-import com.Nepian.HomeCmd.Configuration.Propertie;
+import com.Nepian.HomeCmd.Configuration.Properties;
 import com.Nepian.HomeCmd.Data.NamedHomes;
 import com.Nepian.HomeCmd.Data.Playerdata;
 import com.Nepian.HomeCmd.Util.PlayerUtil;
@@ -39,7 +39,7 @@ public class ConvertCommand extends SubCommand {
 			overwrite = false;
 		}
 		
-		String def = Propertie.DEFAULT_HOME_NAME;
+		String def = Properties.DEFAULT_HOME_NAME;
 		Map<UUID, Playerdata> map = PlayerdataManager.getPlayerdatas();
 		
 		for (UUID uuid : map.keySet()) {

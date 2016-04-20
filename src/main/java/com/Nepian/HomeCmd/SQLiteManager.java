@@ -39,20 +39,22 @@ public class SQLiteManager {
 				+ "pitch not null"
 				+ ")";
 		if (!data.executeUpdate(token)) {
-			Messenger.failed("Could not create a table (&6" + tableName + "&r)");
+			Messenger.error("テーブル (&6" + tableName + "&r) を作成できませんでした");
 		}
-		Messenger.success("Created a table (&6" + tableName + "&r)");
+		Messenger.success("テーブル (&6" + tableName + "&r) を作成しました");
 	}
 	
 	public static void insert(OfflinePlayer offlinePlayer, String homeName, Location home) {
+		String playerName = offlinePlayer.getName();
+		
 		if (has(offlinePlayer, homeName)) {
-			Messenger.debug("Already Exists");
+			Messenger.debug("このホームは既に登録されています (&6" + playerName
+					+ "&r, &6" + homeName + "&r)");
 			update(offlinePlayer, homeName, home);
 			return;
 		}
 		
 		String playerUidStr = offlinePlayer.getUniqueId().toString();
-		String playerName = offlinePlayer.getName();
 		String worldUidStr = home.getWorld().getUID().toString();
 		double x = home.getX();
 		double y = home.getY();
@@ -75,18 +77,22 @@ public class SQLiteManager {
 		token.append(")");
 		
 		if (!data.executeUpdate(token.toString())) {
-			Messenger.failed("Could not insert the data.");
+			Messenger.error("ホームを追加できませんでした (&6" + playerName
+					+ "&r, &6" + homeName + "&r)");
 			return;
 		}
 		
-		Messenger.success("Inserted the data.");
+		Messenger.success("ホームを追加しました (&6" + playerName
+				+ "&r, &6" + homeName + "&r)");
 	}
 	
 	public static void close() {
 		if (!data.close()) {
-			Messenger.failed("Could not close a SQLite file (&6" + data.getFile().getName() + "&r)");
+			Messenger.error("データベースファイル (&6" + data.getFile().getName()
+					+ "&r) からの切断に失敗しました");
 		}
-		Messenger.success("Closed a SQLite file (&6" + data.getFile().getName() + "&r)");
+		Messenger.success("データベースファイル (&6" + data.getFile().getName()
+				+ "&r) から切断しました");
 	}
 	
 	public static boolean has(OfflinePlayer offlinePlayer, String homeName) {
@@ -136,11 +142,13 @@ public class SQLiteManager {
 		token.append("home_name = ").append("'" + homeName + "'");
 		
 		if (!data.executeUpdate(token.toString())) {
-			Messenger.failed("Could not update the data.");
+			Messenger.error("ホームを更新することができませんでした (&6" + playerName
+					+ "&r, &6" + homeName + "&r)");
 			return;
 		}
 		
-		Messenger.success("Updated the data.");
+		Messenger.success("ホームを更新しました (&6" + playerName
+				+ "&r, &6" + homeName + "&r)");
 	}
 	
 	public static Location getHome(OfflinePlayer player, String homeName) {

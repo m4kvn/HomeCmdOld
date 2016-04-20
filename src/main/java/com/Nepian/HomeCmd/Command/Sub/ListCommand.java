@@ -6,6 +6,7 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.Nepian.HomeCmd.Messenger;
 import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
 
@@ -26,11 +27,11 @@ public class ListCommand extends SubCommand {
 		List<String> list = SQLiteManager.getHomeList(player);
 		
 		if (list == null) {
-			player.sendMessage("ホームが設定されていません");
+			Messenger.sendFailed(player, "ホームが設定されていません");
 			return;
 		}
 		
-		player.sendMessage("Homes: " + list.toString());
+		Messenger.send(player, "Homes: " + list);
 	}
 
 	@Override

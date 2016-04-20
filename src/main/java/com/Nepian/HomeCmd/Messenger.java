@@ -3,6 +3,7 @@ package com.Nepian.HomeCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.Nepian.HomeCmd.Configuration.Config;
 import com.Nepian.HomeCmd.Util.Sender;
 
 public class Messenger {
@@ -12,12 +13,14 @@ public class Messenger {
 		sender = new Sender(plugin);
 	}
 	
-	public static void log(String str) {
-		sender.log(str);
+	public static void log(Object obj) {
+		sender.log(obj);
 	}
 	
 	public static void debug(Object obj) {
-		sender.log("&eDEBUG:&r " + obj);
+		if (Config.getBool(Config.Key.DEBUG_MESSAGE)) {
+			log("&eDEBUG:&r " + obj);
+		}
 	}
 	
 	public static void success(Object obj) {
@@ -28,7 +31,19 @@ public class Messenger {
 		debug("&4FAILED:&r " + obj);
 	}
 	
+	public static void error(Object obj) {
+		log("&4ERROR:&r " + obj);
+	}
+	
 	public static void send(CommandSender sender, Object obj) {
 		Messenger.sender.send(sender, obj);
+	}
+	
+	public static void sendFailed(CommandSender sender, Object obj) {
+		send(sender, "&4FAILED:&r " + obj);
+	}
+	
+	public static void sendSuccess(CommandSender sender, Object obj) {
+		send(sender, "&9SUCCESS:&r " + obj);
 	}
 }

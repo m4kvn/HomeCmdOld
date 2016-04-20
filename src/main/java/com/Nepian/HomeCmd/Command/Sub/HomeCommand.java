@@ -7,8 +7,10 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.Nepian.HomeCmd.Messenger;
 import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
+import com.Nepian.HomeCmd.Configuration.Properties;
 
 public class HomeCommand extends SubCommand {
 
@@ -24,14 +26,15 @@ public class HomeCommand extends SubCommand {
 			return;
 		}
 
+		String def = Properties.DEFAULT_HOME_NAME;
 		Player player = (Player) sender;
 		Location location = null;
 
 		if (args.length == 0) {
-			location = SQLiteManager.getHome(player, "-default");
+			location = SQLiteManager.getHome(player, def);
 			
 			if (location == null) {
-				player.sendMessage("デフォルトのホームが設定されていません");
+				Messenger.sendFailed(player, "デフォルトのホームが設定されていません");
 				return;
 			}
 		} else if (args.length == 1) {
@@ -40,7 +43,7 @@ public class HomeCommand extends SubCommand {
 			location = SQLiteManager.getHome(player, homeName);
 
 			if (location == null) {
-				player.sendMessage("ホーム<" + homeName + ">は設定されていません");
+				Messenger.sendFailed(player, "ホーム<" + homeName + ">は設定されていません");
 				return;
 			}
 		}
