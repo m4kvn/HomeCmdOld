@@ -26,6 +26,9 @@ public class SQLiteManager {
 		createTable();
 	}
 	
+	/**
+	 * テーブルを作成する
+	 */
 	private static void createTable() {
 		String token = "create table if not exists " + tableName + " ("
 				+ "player_uuid not null, "
@@ -44,6 +47,12 @@ public class SQLiteManager {
 		Messenger.success("テーブル (&6" + tableName + "&r) を作成しました");
 	}
 	
+	/**
+	 * ホームデータを追加する
+	 * @param offlinePlayer
+	 * @param homeName
+	 * @param home
+	 */
 	public static void insert(OfflinePlayer offlinePlayer, String homeName, Location home) {
 		String playerName = offlinePlayer.getName();
 		
@@ -86,6 +95,38 @@ public class SQLiteManager {
 				+ "&r, &6" + homeName + "&r)");
 	}
 	
+	public static boolean delete(OfflinePlayer player, String name) {
+		String uuid = player.getUniqueId().toString();
+		String playerName = player.getName();
+		
+		if (!has(player, name)) {
+			Messenger.failed("ホームが存在しないため削除に失敗しました (&6" + playerName
+					+ "&r, &6" + name + "&r)");
+			return false;
+		}
+		
+		StringBuilder token = new StringBuilder("");
+		
+		token.append("delete from ").append(tableName);
+		token.append(" where ");
+		token.append("player_uuid = ").append("'" + uuid + "'");
+		token.append(" and ");
+		token.append("home_name = ").append("'" + name + "'");
+		
+		if (!data.executeUpdate(token.toString())) {
+			Messenger.error("ホームを削除できませんでした (&6" + playerName
+					+ "&r, &6" + name + "&r)");
+			return false;
+		} else {
+			Messenger.success("ホームを削除しました (&6" + playerName
+					+ "&r, &6" + name + "&r)");
+			return true;
+		}
+	}
+	
+	/**
+	 * データベースから切断する
+	 */
 	public static void close() {
 		if (!data.close()) {
 			Messenger.error("データベースファイル (&6" + data.getFile().getName()
@@ -95,6 +136,12 @@ public class SQLiteManager {
 				+ "&r) から切断しました");
 	}
 	
+	/**
+	 * ホームが既に登録されているか確認する
+	 * @param offlinePlayer
+	 * @param homeName
+	 * @return
+	 */
 	public static boolean has(OfflinePlayer offlinePlayer, String homeName) {
 		String playerUidStr = offlinePlayer.getUniqueId().toString();
 		StringBuilder token = new StringBuilder("");
@@ -117,6 +164,12 @@ public class SQLiteManager {
 		return false;
 	}
 	
+	/**
+	 * ホームデータを更新する
+	 * @param offlinePlayer
+	 * @param homeName
+	 * @param home
+	 */
 	public static void update(OfflinePlayer offlinePlayer, String homeName, Location home) {
 		String playerUidStr = offlinePlayer.getUniqueId().toString();
 		String playerName = offlinePlayer.getName();
@@ -151,6 +204,12 @@ public class SQLiteManager {
 				+ "&r, &6" + homeName + "&r)");
 	}
 	
+	/**
+	 * ホームを取得する
+	 * @param player
+	 * @param homeName
+	 * @return
+	 */
 	public static Location getHome(OfflinePlayer player, String homeName) {
 		String playerUidStr = player.getUniqueId().toString();
 		StringBuilder token = new StringBuilder("");
@@ -181,6 +240,11 @@ public class SQLiteManager {
 		return null;
 	}
 	
+	/**
+	 * ホームデータ一覧を表示する
+	 * @param player
+	 * @return
+	 */
 	public static List<String> getHomeList(OfflinePlayer player) {
 		String playerUidStr = player.getUniqueId().toString();
 		StringBuilder token = new StringBuilder("");
@@ -203,6 +267,10 @@ public class SQLiteManager {
 		return list;
 	}
 	
+	/**
+	 * 全プレイヤーのホームデータ一覧を取得する
+	 * @return
+	 */
 	public static Map<String, List<String>> getDatas() {
 		String token = "select distinct player_name, player_uuid from " + tableName;
 		ResultSet rs = data.executeQuery(token);
