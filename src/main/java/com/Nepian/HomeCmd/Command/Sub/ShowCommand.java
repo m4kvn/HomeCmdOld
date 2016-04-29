@@ -1,37 +1,37 @@
 package com.Nepian.HomeCmd.Command.Sub;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.command.ConsoleCommandSender;
 
 import com.Nepian.HomeCmd.Messenger;
 import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
 
-public class ListCommand extends SubCommand {
-
-	public ListCommand() {
-		super("list", "l");
+public class ShowCommand extends SubCommand {
+	
+	public ShowCommand() {
+		super("show");
+		setPermission("homecmd.show");
 	}
 
 	@Override
 	public void execute(CommandSender sender, String label, String[] args) throws CommandException {
-
-		if (!(sender instanceof Player)) {
-			return;
-		}
-
-		Player player = (Player) sender;
-		List<String> list = SQLiteManager.getHomeList(player);
 		
-		if (list == null) {
-			Messenger.sendFailed(player, "ホームが設定されていません");
+		if (!(sender instanceof ConsoleCommandSender)) {
+			Messenger.sendFailed(sender, "このコマンドはコンソールからのみ使用できます");
 			return;
 		}
 		
-		Messenger.send(player, "Homes: " + list);
+		Map<String, List<String>> datas = SQLiteManager.getDatas();
+		
+		for (String name : datas.keySet()) {
+			List<String> list = datas.get(name);
+			Messenger.log(name + ": " + list);
+		}
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ListCommand extends SubCommand {
 
 	@Override
 	public SubCommandType getType() {
-		return SubCommandType.GENERIC;
+		return SubCommandType.HIDDEN;
 	}
 
 }

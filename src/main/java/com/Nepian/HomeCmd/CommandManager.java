@@ -3,9 +3,12 @@ package com.Nepian.HomeCmd;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.Nepian.HomeCmd.Command.CommandHandler;
+import com.Nepian.HomeCmd.Command.Sub.ConvertCommand;
+import com.Nepian.HomeCmd.Command.Sub.DeleteCommand;
 import com.Nepian.HomeCmd.Command.Sub.HomeCommand;
 import com.Nepian.HomeCmd.Command.Sub.ListCommand;
 import com.Nepian.HomeCmd.Command.Sub.SetCommand;
+import com.Nepian.HomeCmd.Command.Sub.ShowCommand;
 import com.Nepian.HomeCmd.Util.Utility;
 
 public class CommandManager {
@@ -16,6 +19,9 @@ public class CommandManager {
 		command.registerMainCommand(new HomeCommand());
 		command.registerSubCommand(new SetCommand());
 		command.registerSubCommand(new ListCommand());
+		command.registerSubCommand(new ShowCommand());
+		command.registerSubCommand(new ConvertCommand());
+		command.registerSubCommand(new DeleteCommand());
 
 		Utility.registerCommand(plugin, "home", command);
 	}

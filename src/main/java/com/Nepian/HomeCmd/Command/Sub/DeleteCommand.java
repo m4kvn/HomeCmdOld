@@ -2,7 +2,6 @@ package com.Nepian.HomeCmd.Command.Sub;
 
 import java.util.List;
 
-import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,44 +11,34 @@ import com.Nepian.HomeCmd.SQLiteManager;
 import com.Nepian.HomeCmd.Command.SubCommand;
 import com.Nepian.HomeCmd.Configuration.Properties;
 
-public class SetCommand extends SubCommand {
+public class DeleteCommand extends SubCommand {
 
-	public SetCommand() {
-		super("set", "s");
-		setPermission("homecmd.set");
+	public DeleteCommand() {
+		super("delete", "d", "del");
+		setPermission("homecmd.delete");
 	}
-
+	
 	@Override
 	public void execute(CommandSender sender, String label, String[] args) throws CommandException {
 
 		if (!(sender instanceof Player)) {
 			return;
 		}
-
-		String def = Properties.DEFAULT_HOME_NAME;
+		
 		Player player = (Player) sender;
-		Location location = player.getLocation();
-
-		if (args.length == 0) {
-			SQLiteManager.insert(player, def, location);
-			Messenger.sendSuccess(player, "デフォルトのホームを設定しました");
-
-		} else if (args.length == 1) {
-			String homename = args[0];
-
-			if (homename.contains("-")) {
-				Messenger.sendFailed(player, "ホーム名に\"-\"は使用できません");
-				return;
-			}
-
-			SQLiteManager.insert(player, homename, location);
-			Messenger.sendSuccess(player, "ホーム<" + homename + ">を設定しました");
+		String name = (args.length == 0) ? Properties.DEFAULT_HOME_NAME : args[0];
+		
+		if (SQLiteManager.delete(player, name)) {
+			Messenger.sendSuccess(sender, "ホーム (&6" + name + "&r) を削除しました");
+		} else {
+			Messenger.sendFailed(sender, "ホーム (&6" + name + "&r) の削除に失敗しました");
 		}
+		
 	}
 
 	@Override
 	public String getPossibleArguments() {
-		return "<ホームの名前>";
+		return "<ホーム>";
 	}
 
 	@Override
