@@ -1,0 +1,9 @@
+name: HomeCmd
+main: com.Nepian.HomeCmd.Main
+version: 0.6.6
+author: Nepian
+load: POSTWORLD
+softdepend: [ Multiverse-Core ]
+commands:
+  home:
+    usage: /<command>
