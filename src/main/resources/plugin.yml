@@ -3,7 +3,7 @@ main: com.Nepian.HomeCmd.Main
 version: 0.6.6
 author: Nepian
 load: POSTWORLD
-softdepend: [ Multiverse-Core ]
+softdepend: [ Myhomes ]
 commands:
-  home:
+  convert:
     usage: /<command>

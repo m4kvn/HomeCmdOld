@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.Nepian.HomeCmd</groupId>
   <artifactId>HomeCmd</artifactId>
-  <version>0.6.6</version>
+  <version>0.6.6-ConvertToMyhomes</version>
 
   <properties>
     <github.global.server>github</github.global.server>
@@ -21,6 +21,14 @@
       <id>spigotmc-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
     </repository>
+    <repository>
+      <id>npcore-repo</id>
+      <url>https://raw.github.com/MasahiroSaito/NPCore/mvn-repo/</url>
+    </repository>
+    <repository>
+      <id>myhomes-repo</id>
+      <url>https://raw.github.com/MasahiroSaito/MyHomes/mvn-repo/</url>
+    </repository>
   </repositories>
 
   <dependencies>
@@ -28,6 +36,18 @@
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
       <version>1.9-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.Nepian.NPCore</groupId>
+      <artifactId>NPCore</artifactId>
+      <version>0.2.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.Nepian.MyHomes</groupId>
+      <artifactId>MyHomes</artifactId>
+      <version>0.1.2</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
