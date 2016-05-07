@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.Nepian.HomeCmd</groupId>
+  <artifactId>HomeCmd</artifactId>
+  <versioning>
+    <release>0.6.6-ConvertToMyhomes</release>
+    <versions>
+      <version>0.6.6-ConvertToMyhomes</version>
+    </versions>
+    <lastUpdated>20160507135346</lastUpdated>
+  </versioning>
+</metadata>
