@@ -23,11 +23,11 @@
     </repository>
     <repository>
       <id>npcore-repo</id>
-      <url>https://raw.github.com/MasahiroSaito/NPCore/mvn-repo/</url>
+      <url>https://github.com/MasahiroSaito/NPCore/tree/mvn-repo</url>
     </repository>
     <repository>
       <id>myhomes-repo</id>
-      <url>https://raw.github.com/MasahiroSaito/MyHomes/mvn-repo/</url>
+      <url>https://github.com/MasahiroSaito/Myhomes/tree/mvn-repo</url>
     </repository>
   </repositories>
 
@@ -45,8 +45,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.Nepian.MyHomes</groupId>
-      <artifactId>MyHomes</artifactId>
+      <groupId>com.Nepian.Myhomes</groupId>
+      <artifactId>Myhomes</artifactId>
       <version>0.1.2</version>
       <scope>provided</scope>
     </dependency>
